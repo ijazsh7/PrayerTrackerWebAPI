@@ -1,0 +1,6 @@
+@PrayerTrackerWebAPI_HostAddress = http://localhost:5188
+
+GET {{PrayerTrackerWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -68,17 +68,24 @@ if (app.Environment.IsDevelopment())
 }
 else {
     // This is for non-development environments like staging, production/azure  etc
-    // after build, add migration at the code level to perform ef db migration to target i.e. azure or any other target
-    // this is manually done from powershell
+// after build, add migration at the code level to perform ef db migration to target i.e. azure or any other target
+// this is manually done from powershell
 
-    using (var scope = app.Services.CreateScope())
-    {
-        var db = scope.ServiceProvider.GetRequiredService<PrayerDbContext>();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PrayerDbContext>();
         if (db.Database.IsRelational())
         {
-            db.Database.Migrate();
-        }
-    }
+        db.Database.Migrate();
+    }    
+}
+
+
+// This is equivalent to Configure in older versions
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 // Enable CORS first (so it applies to all subsequent middleware)
